@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 import configparser
 from datetime import datetime
 import enum
+from contextlib import contextmanager
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -16,6 +17,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
+@contextmanager
 def get_db():
     db = SessionLocal()
     try:
